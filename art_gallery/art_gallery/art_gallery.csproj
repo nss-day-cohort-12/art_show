@@ -89,6 +89,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\art_gallery_db.mdf" />
+    <Content Include="App_Data\art_gallery_db_log.ldf">
+      <DependentUpon>art_gallery_db.mdf</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -97,6 +101,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Agent.cs" />
+    <Compile Include="Models\Artist.cs" />
+    <Compile Include="Models\ArtShow.cs" />
+    <Compile Include="Models\ArtWork.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\IndividualPiece.cs" />
+    <Compile Include="Models\Invoice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -110,9 +121,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
