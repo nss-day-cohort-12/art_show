@@ -1,7 +1,8 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
+﻿@model art_gallery.ViewModel.ArtDetailViewModel
 
 <h2>Index</h2>
 
+@foreach (var item in Model.ArtListings)
+{
+  <div>@item.Title</div>
+}
