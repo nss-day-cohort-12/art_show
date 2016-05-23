@@ -10,6 +10,7 @@ namespace art_gallery.Models
     public int IndividualPieceId { get; set; }
     public int ArtWorkId { get; set; }
     public string Image { get; set; }
+    public string PurchaseURL { get; set; }
     public string DateCreated { get; set; }
     public decimal Cost { get; set; }
     public decimal Price { get; set; }

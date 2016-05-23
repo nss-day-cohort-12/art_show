@@ -22,7 +22,8 @@ namespace art_gallery.Controllers
                         {
                           ArtWorkId = work.ArtWorkId,
                           Title = work.Title,
-                          Image = piece.Image
+                          Image = piece.Image,
+                          PurchaseURL = piece.PurchaseURL
                         }).ToList();
       return View(art);
     }
