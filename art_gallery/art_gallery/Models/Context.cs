@@ -9,7 +9,10 @@ namespace art_gallery.Models
 {
   public class Context : DbContext
   {
-    public DbSet<ArtWork> ArtWork { get; set; }
+        public DbSet<ArtWork> ArtWork { get; set; }
+        public DbSet<IndividualPiece> IndividualPiece { get; set; }
+        public DbSet<Artist> Artist { get; set; }
+
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
