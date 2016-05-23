@@ -10,7 +10,6 @@ namespace art_gallery.Controllers
 {
   public class HomeController : Controller
   {
-    public List<ArtWork> ArtListings { get; set; }
     // GET: Home
     public ActionResult Index()
     {
