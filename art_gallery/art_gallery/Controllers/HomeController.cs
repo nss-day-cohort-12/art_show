@@ -18,12 +18,19 @@ namespace art_gallery.Controllers
       art.ArtListings = (from work in _context.ArtWork
                         join piece in _context.IndividualPiece
                         on work.ArtWorkId equals piece.ArtWorkId
-                        select new ArtWorkWithImagesViewModel
+                        group work by new
                         {
                           ArtWorkId = work.ArtWorkId,
                           Title = work.Title,
                           Image = piece.Image,
                           PurchaseURL = piece.PurchaseURL
+                        } into artgroup
+                        select new ArtWorkWithImagesViewModel
+                        {
+                          ArtWorkId = artgroup.Key.ArtWorkId,
+                          Title = artgroup.Key.Title,
+                          Image = artgroup.Key.Image,
+                          PurchaseURL = artgroup.Key.PurchaseURL
                         }).ToList();
       return View(art);
     }
