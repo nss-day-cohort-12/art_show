@@ -1,7 +1,17 @@
-﻿
+﻿@model art_gallery.ViewModel.OwnerInventoryViewModel
 @{
     ViewBag.Title = "OwnerInventory";
 }
 
 <h2>OwnerInventory</h2>
+
+@foreach (var item in Model.Inventory)
+{
+    <article>
+        <div>Title: @item.Title</div>
+        <div>Artist: @item.Name</div>
+        <div>Price: $@item.Price</div>
+        <div>Cost: $@item.Cost</div>
+    </article>
+}
 

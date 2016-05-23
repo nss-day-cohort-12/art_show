@@ -30,16 +30,8 @@ namespace art_gallery.Controllers
                                       Cost = ip.Cost,
                                       Price = ip.Price,
                                   }).ToList();
-
             return View(ownerInv);
         }
-
-
-
-
-
-
-
 
         // GET: Owner/Details/5
         public ActionResult Details(int id)
