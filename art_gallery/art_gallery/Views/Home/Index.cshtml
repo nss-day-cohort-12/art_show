@@ -4,5 +4,6 @@
 
 @foreach (var item in Model.ArtListings)
 {
+  <div><img src="@item.Image" alt="@item.Title" /></div>
   <div>@item.Title</div>
 }

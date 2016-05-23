@@ -15,7 +15,15 @@ namespace art_gallery.Controllers
     {
       Context _context = new Context();
       ArtDetailViewModel art = new ArtDetailViewModel();
-      art.ArtListings = _context.ArtWork.ToList();
+      art.ArtListings = (from work in _context.ArtWork
+                        join piece in _context.IndividualPiece
+                        on work.ArtWorkId equals piece.ArtWorkId
+                        select new ArtWorkWithImagesViewModel
+                        {
+                          ArtWorkId = work.ArtWorkId,
+                          Title = work.Title,
+                          Image = piece.Image
+                        }).ToList();
       return View(art);
     }
   }
