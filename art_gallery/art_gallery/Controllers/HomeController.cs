@@ -18,19 +18,27 @@ namespace art_gallery.Controllers
       art.ArtListings = (from work in _context.ArtWork
                         join piece in _context.IndividualPiece
                         on work.ArtWorkId equals piece.ArtWorkId
+                        join artist in _context.Artist
+                        on work.ArtistId equals artist.ArtistId
                         group work by new
                         {
                           ArtWorkId = work.ArtWorkId,
                           Title = work.Title,
                           Image = piece.Image,
-                          PurchaseURL = piece.PurchaseURL
+                          PurchaseURL = piece.PurchaseURL,
+                          ArtistId = artist.ArtistId,
+                          ArtistName = artist.Name,
+                          Medium = work.Medium
                         } into artgroup
                         select new ArtWorkWithImagesViewModel
                         {
                           ArtWorkId = artgroup.Key.ArtWorkId,
                           Title = artgroup.Key.Title,
                           Image = artgroup.Key.Image,
-                          PurchaseURL = artgroup.Key.PurchaseURL
+                          PurchaseURL = artgroup.Key.PurchaseURL,
+                          ArtistId = artgroup.Key.ArtistId,
+                          ArtistName = artgroup.Key.ArtistName,
+                          Medium = artgroup.Key.Medium
                         }).ToList();
       return View(art);
     }
@@ -38,10 +46,11 @@ namespace art_gallery.Controllers
     public ActionResult IndividualPieceView(int ArtWorkId)
     {
       Context _context = new Context();
-      ArtDetailViewModel art = new ArtDetailViewModel();
-      art.ArtListings = (from work in _context.ArtWork
+      ArtWorkWithImagesViewModel artPiece = (from work in _context.ArtWork
                          join piece in _context.IndividualPiece
                          on work.ArtWorkId equals piece.ArtWorkId
+                         join artist in _context.Artist
+                         on work.ArtistId equals artist.ArtistId
                          where work.ArtWorkId == ArtWorkId
                          select new ArtWorkWithImagesViewModel
                          {
@@ -52,8 +61,11 @@ namespace art_gallery.Controllers
                            Dimensions = work.Dimensions,
                            NumberInInventory = work.NumberInInventory,
                            Location = piece.Location,
-                           Price = piece.Price
-                         }).ToList();
+                           Price = piece.Price,
+                           ArtistId = artist.ArtistId,
+                           ArtistName = artist.Name,
+                           Medium = work.Medium
+                         }).FirstOrDefault();
       /* image
        * price
        * dimensions
@@ -61,6 +73,28 @@ namespace art_gallery.Controllers
        * location
        */
 
+      return View(artPiece);
+    }
+
+    public ActionResult IndividualArtistView(int ArtistId)
+    {
+      Context _context = new Context();
+      ArtDetailViewModel art = new ArtDetailViewModel();
+      art.ArtListings = (from work in _context.ArtWork
+                         join piece in _context.IndividualPiece
+                         on work.ArtWorkId equals piece.ArtWorkId
+                         join artist in _context.Artist
+                         on work.ArtistId equals artist.ArtistId
+                         where work.ArtistId == ArtistId
+                         select new ArtWorkWithImagesViewModel
+                         {
+                           ArtWorkId = work.ArtWorkId,
+                           Title = work.Title,
+                           Image = piece.Image,
+                           PurchaseURL = piece.PurchaseURL,
+                           ArtistName = artist.Name,
+                           Medium = work.Medium
+                         }).ToList();
       return View(art);
     }
   }

@@ -1,18 +1,17 @@
-﻿@model art_gallery.ViewModel.ArtDetailViewModel
+﻿@model art_gallery.ViewModel.ArtWorkWithImagesViewModel
 
 <div class="row">
-@foreach (var item in Model.ArtListings)
-{
   <div class="col-md-3"></div>
   <div class="col-md-6">
-    <h2>@item.Title</h2>
-    <div><a href="@Url.Action("IndividualPieceView", "Home", new { ArtWorkId = @item.ArtWorkId })"><img src="@item.Image" alt="@item.Title" /></a></div>
-    <div>Dimensions: @item.Dimensions</div>
-    <div>$@item.Price</div>
-    <div>There are only @item.NumberInInventory of this item remaining.</div>
-    <h4><a href="@item.PurchaseURL">Buy this art NOW!</a></h4>
-    <div>You can view this piece at @item.Location</div>
+    <h2>@Model.Title</h2>
+    <h4>by <a href="@Url.Action("IndividualArtistView", "Home", new { ArtistId = Model.ArtistId })">@Model.ArtistName</a></h4>
+    <div><a href="@Url.Action("IndividualPieceView", "Home", new { ArtWorkId = @Model.ArtWorkId })"><img src="@Model.Image" alt="@Model.Title" /></a></div>
+    <div>Dimensions: @Model.Dimensions</div>
+    <div>Medium: @Model.Medium</div>
+    <div>$@Model.Price</div>
+    <div>There are only @Model.NumberInInventory of this item remaining.</div>
+    <h4><a href="@Model.PurchaseURL">Buy this art NOW!</a></h4>
+    <div>You can view this piece at @Model.Location</div>
   </div>
   <div class="col-md-3"></div>
-}
 </div>

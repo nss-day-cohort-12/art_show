@@ -15,5 +15,8 @@ namespace art_gallery.ViewModel
     public string Dimensions { get; set; }
     public int NumberInInventory { get; set; }
     public string Location { get; set; }
+    public int ArtistId { get; set; }
+    public string ArtistName { get; set; }
+    public string Medium { get; set; }
   }
 }
