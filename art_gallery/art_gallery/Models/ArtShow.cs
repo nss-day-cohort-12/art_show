@@ -12,5 +12,7 @@ namespace art_gallery.Models
     public string ShowLocation { get; set; }
     public string Agents { get; set; }
     public string Overhead { get; set; }
-  }
+    public string ShowName { get; set; }
+    public DateTime ShowDate { get; set; }
+    }
 }

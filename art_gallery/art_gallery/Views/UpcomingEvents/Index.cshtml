@@ -1,0 +1,16 @@
+﻿@model art_gallery.ViewModel.UpcomingEventsViewModel
+@{
+    ViewBag.Title = "Upcoming Events";
+}
+
+<h2>Upcoming Events</h2>
+
+@foreach (var item in Model.UpcomingEvents)
+{
+    <div>@item.ShowName</div>
+    <div>Date:@item.ShowDate</div>
+    <div>Location:@item.ShowLocation</div>
+    <div>Agents: @item.Agents</div>
+    <div>Artists: @item.ArtistName</div>
+    <br /><br />
+}
