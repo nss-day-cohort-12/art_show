@@ -13,6 +13,7 @@ namespace art_gallery.Models
     public DbSet<ArtShow> ArtShow { get; set; }
     public DbSet<Artist> Artist { get; set; }
     public DbSet<Agent> Agent { get; set; }
+    public DbSet<IndividualPiece> IndividualPiece { get; set; }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
