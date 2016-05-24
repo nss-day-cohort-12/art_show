@@ -18,6 +18,12 @@ namespace art_gallery
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "UpcomingEvents",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "UpcomingEvents", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }
