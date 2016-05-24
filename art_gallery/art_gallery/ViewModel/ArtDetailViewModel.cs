@@ -8,6 +8,6 @@ namespace art_gallery.ViewModel
 {
   public class ArtDetailViewModel
   {
-    public List<ArtWork> ArtListings { get; set; }
+    public List<ArtWorkWithImagesViewModel> ArtListings { get; set; }
   }
 }
