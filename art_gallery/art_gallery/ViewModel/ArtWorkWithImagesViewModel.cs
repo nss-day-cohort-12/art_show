@@ -11,5 +11,9 @@ namespace art_gallery.ViewModel
     public string Title { get; set; }
     public string Image { get; set; }
     public string PurchaseURL { get; set; }
+    public decimal Price { get; set; }
+    public string Dimensions { get; set; }
+    public int NumberInInventory { get; set; }
+    public string Location { get; set; }
   }
 }

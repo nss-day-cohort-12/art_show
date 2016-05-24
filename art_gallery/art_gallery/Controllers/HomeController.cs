@@ -34,5 +34,34 @@ namespace art_gallery.Controllers
                         }).ToList();
       return View(art);
     }
+
+    public ActionResult IndividualPieceView(int ArtWorkId)
+    {
+      Context _context = new Context();
+      ArtDetailViewModel art = new ArtDetailViewModel();
+      art.ArtListings = (from work in _context.ArtWork
+                         join piece in _context.IndividualPiece
+                         on work.ArtWorkId equals piece.ArtWorkId
+                         where work.ArtWorkId == ArtWorkId
+                         select new ArtWorkWithImagesViewModel
+                         {
+                           ArtWorkId = work.ArtWorkId,
+                           Title = work.Title,
+                           Image = piece.Image,
+                           PurchaseURL = piece.PurchaseURL,
+                           Dimensions = work.Dimensions,
+                           NumberInInventory = work.NumberInInventory,
+                           Location = piece.Location,
+                           Price = piece.Price
+                         }).ToList();
+      /* image
+       * price
+       * dimensions
+       * # in inventory
+       * location
+       */
+
+      return View(art);
+    }
   }
 }
