@@ -23,12 +23,14 @@ namespace art_gallery.Controllers
                                   on aw.ArtWorkId equals ip.ArtWorkId
                                   join ar in _context.Artist
                                   on aw.ArtistId equals ar.ArtistId
+                                  orderby ip.IndividualPieceId
                                   select new OwnerInventory
                                   {
                                       Title = aw.Title,
                                       Name = ar.Name,
                                       Cost = ip.Cost,
                                       Price = ip.Price,
+                                      IndividualPieceId = ip.IndividualPieceId
                                   }).ToList();
             return View(ownerInv);
         }
@@ -62,31 +64,93 @@ namespace art_gallery.Controllers
         }
 
         // GET: Owner/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int ipId)
         {
-            return View();
+            using (Context _context = new Context())
+            {
+                var ipDetails = (from ip in _context.IndividualPiece
+                                 join aw in _context.ArtWork
+                                 on ip.ArtWorkId equals aw.ArtWorkId
+                                 join ar in _context.Artist
+                                 on aw.ArtistId equals ar.ArtistId
+                                 where ip.IndividualPieceId == ipId
+                                 select new OwnerInventoryViewModel
+                                 {
+                                     Image = ip.Image,
+                                     Cost = ip.Cost,
+                                     Price = ip.Price,
+                                     Sold = ip.Sold,
+                                     Location = ip.Location,
+                                     IndividualPieceId = ip.IndividualPieceId,
+                                     EditionNumber = ip.EditionNumber,
+                                     Name = ar.Name,
+                                     Title = aw.Title,
+                                     NumberInInventory = aw.NumberInInventory
+                                 }).ToList();
+
+                OwnerInventoryListViewModel ownerInventoryModel = new OwnerInventoryListViewModel
+                {
+                    Name = ipDetails.Select(a => a.Name).FirstOrDefault(),
+                    Image = ipDetails.Select(a => a.Image).FirstOrDefault(),
+                    Price = ipDetails.Select(a => a.Price).FirstOrDefault(),
+                    Cost = ipDetails.Select(a => a.Cost).FirstOrDefault(),
+                    IndividualPieceId = ipDetails.Select(a => a.IndividualPieceId).FirstOrDefault()
+                };
+
+                return View(ownerInventoryModel);
+            }
         }
 
         // POST: Owner/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit( OwnerInventoryListViewModel ownerInvDetails )
         {
-            try
             {
-                // TODO: Add update logic here
+                using (Context _context = new Context())
+                {
+                    var IndvP = _context.IndividualPiece.Find(ownerInvDetails.IndividualPieceId);
+                    if (ModelState.IsValid)
+                    {
+                        IndvP.Price = ownerInvDetails.Price;
+                        IndvP.Cost = ownerInvDetails.Cost;
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+                        _context.SaveChanges();
+                    }
+
+                    var Artist = _context.Artist.Find(ownerInvDetails.ArtistId);
+                    if (ModelState.IsValid)
+                    {
+
+
+                        _context.SaveChanges();
+                    }
+
+                    var Artwork = _context.IndividualPiece.Find(ownerInvDetails.ArtWorkId);
+                    if (ModelState.IsValid)
+                    {
+
+                        _context.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    return View(ownerInvDetails);
+                }
             }
         }
 
         // GET: Owner/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            if (id != 0)
+            {
+                using (Context _context = new Context())
+                {
+                    IndividualPiece idvP = _context.IndividualPiece.Find(id);
+
+                    _context.IndividualPiece.Remove(idvP);
+                    _context.SaveChanges();
+                }
+            }
+            return RedirectToAction("Index");
         }
 
         // POST: Owner/Delete/5
