@@ -8,7 +8,7 @@
       <h4>@item.Title</h4>
       <h4>by @item.ArtistName</h4>
       <div><a href="@Url.Action("IndividualPieceView", "Home", new { ArtWorkId = @item.ArtWorkId })"><img src="@item.Image" alt="@item.Title" /></a></div>
-      <div>Medium: @item.Medium</div>
+      <div>Medium: <a href="@Url.Action("IndividualMediumView", "Home", new { MediumType = item.Medium })">@item.Medium</a></div>
     </div>
     <div class="col-md-1"></div>
   }

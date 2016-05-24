@@ -97,5 +97,28 @@ namespace art_gallery.Controllers
                          }).ToList();
       return View(art);
     }
+
+    public ActionResult IndividualMediumView(string MediumType)
+    {
+      Context _context = new Context();
+      ArtDetailViewModel art = new ArtDetailViewModel();
+      art.ArtListings = (from work in _context.ArtWork
+                         join piece in _context.IndividualPiece
+                         on work.ArtWorkId equals piece.ArtWorkId
+                         join artist in _context.Artist
+                         on work.ArtistId equals artist.ArtistId
+                         where work.Medium == MediumType
+                         select new ArtWorkWithImagesViewModel
+                         {
+                           ArtWorkId = work.ArtWorkId,
+                           Title = work.Title,
+                           Image = piece.Image,
+                           PurchaseURL = piece.PurchaseURL,
+                           ArtistName = artist.Name,
+                           Medium = work.Medium,
+                           ArtistId = artist.ArtistId
+                         }).ToList();
+      return View(art);
+    }
   }
 }

@@ -163,6 +163,7 @@
     <Content Include="Views\Owner\Index.cshtml" />
     <Content Include="Views\Home\IndividualPieceView.cshtml" />
     <Content Include="Views\Home\IndividualArtistView.cshtml" />
+    <Content Include="Views\Home\IndividualMediumView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -7,7 +7,7 @@
     <h4>by <a href="@Url.Action("IndividualArtistView", "Home", new { ArtistId = Model.ArtistId })">@Model.ArtistName</a></h4>
     <div><a href="@Url.Action("IndividualPieceView", "Home", new { ArtWorkId = @Model.ArtWorkId })"><img src="@Model.Image" alt="@Model.Title" /></a></div>
     <div>Dimensions: @Model.Dimensions</div>
-    <div>Medium: @Model.Medium</div>
+    <div>Medium: <a href="@Url.Action("IndividualMediumView", "Home", new { MediumType = Model.Medium })">@Model.Medium</a></div>
     <div>$@Model.Price</div>
     <div>There are only @Model.NumberInInventory of this item remaining.</div>
     <h4><a href="@Model.PurchaseURL">Buy this art NOW!</a></h4>
