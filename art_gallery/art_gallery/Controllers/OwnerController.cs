@@ -140,7 +140,17 @@ namespace art_gallery.Controllers
         // GET: Owner/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            if (id != 0)
+            {
+                using (Context _context = new Context())
+                {
+                    IndividualPiece idvP = _context.IndividualPiece.Find(id);
+
+                    _context.IndividualPiece.Remove(idvP);
+                    _context.SaveChanges();
+                }
+            }
+            return RedirectToAction("Index");
         }
 
         // POST: Owner/Delete/5
