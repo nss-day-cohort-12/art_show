@@ -166,6 +166,7 @@
     <Content Include="Views\Home\IndividualArtistView.cshtml" />
     <Content Include="Views\Home\IndividualMediumView.cshtml" />
     <Content Include="Views\Owner\Edit.cshtml" />
+    <Content Include="Views\Owner\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

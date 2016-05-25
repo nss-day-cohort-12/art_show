@@ -1,22 +1,22 @@
 ﻿@model art_gallery.ViewModel.OwnerInventoryListViewModel
+
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-<h2>Edit</h2>
+<h2>Add Art</h2>
 
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(model => model.IndividualPieceId)
     <div>
-        @Html.Label("Name: ")
+        @Html.Label("Artist Name: ")
         @Html.EditorFor(model => model.Name)
     </div>
     <div>
         @Html.Label("Title: ")
         @Html.EditorFor(model => model.Title)
     </div>
-     <div>
+    <div>
         @Html.Label("Price: ")
         @Html.EditorFor(model => model.Price)
     </div>
@@ -33,5 +33,8 @@
         @Html.EditorFor(model => model.Sold)
     </div>
 
-    <input type="submit" value="Save" />
+    <input type="submit" value="Create" />
+
 }
+
+@Html.ActionLink("Back to homepage", "Index")

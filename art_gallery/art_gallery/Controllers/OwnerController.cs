@@ -41,6 +41,15 @@ namespace art_gallery.Controllers
             return View();
         }
 
+        public int getNextArtistId()
+        {
+            using (Context _context = new Context())
+            {
+                var nextId = _context.Artist.Max(x => x.ArtistId) + 1;
+                return nextId;
+            }
+        }
+
         // GET: Owner/Create
         public ActionResult Create()
         {
@@ -49,18 +58,26 @@ namespace art_gallery.Controllers
 
         // POST: Owner/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(OwnerInventoryListViewModel ownerInvDetails)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            var artistId = getNextArtistId();
 
-                return RedirectToAction("Index");
+            using (Context _context = new Context())
+            {        
+                if (ModelState.IsValid)
+                {
+                   Artist artist = new Artist
+                {
+                    Name = ownerInvDetails.Name,
+                    ArtistId = artistId
+                };
+                    _context.Artist.Add(artist); // saves data to the context
+
+                    _context.SaveChanges(); // saves data to database
+                    return RedirectToAction("Index");
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: Owner/Edit/5
@@ -91,9 +108,11 @@ namespace art_gallery.Controllers
                 OwnerInventoryListViewModel ownerInventoryModel = new OwnerInventoryListViewModel
                 {
                     Name = ipDetails.Select(a => a.Name).FirstOrDefault(),
+                    Title = ipDetails.Select(a => a.Title).FirstOrDefault(),
                     Image = ipDetails.Select(a => a.Image).FirstOrDefault(),
                     Price = ipDetails.Select(a => a.Price).FirstOrDefault(),
                     Cost = ipDetails.Select(a => a.Cost).FirstOrDefault(),
+                    Sold = ipDetails.Select(a => a.Sold).FirstOrDefault(),
                     IndividualPieceId = ipDetails.Select(a => a.IndividualPieceId).FirstOrDefault()
                 };
 
@@ -113,6 +132,8 @@ namespace art_gallery.Controllers
                     {
                         IndvP.Price = ownerInvDetails.Price;
                         IndvP.Cost = ownerInvDetails.Cost;
+                        IndvP.Sold = ownerInvDetails.Sold;
+                        IndvP.Location = ownerInvDetails.Location;
 
                         _context.SaveChanges();
                     }
@@ -120,14 +141,16 @@ namespace art_gallery.Controllers
                     var Artist = _context.Artist.Find(ownerInvDetails.ArtistId);
                     if (ModelState.IsValid)
                     {
-
+                        Artist.Name = ownerInvDetails.Name;
 
                         _context.SaveChanges();
                     }
 
-                    var Artwork = _context.IndividualPiece.Find(ownerInvDetails.ArtWorkId);
+                    var Artwork = _context.ArtWork.Find(ownerInvDetails.ArtWorkId);
                     if (ModelState.IsValid)
                     {
+
+                        Artwork.Title = ownerInvDetails.Title;
 
                         _context.SaveChanges();
                         return RedirectToAction("Index");
