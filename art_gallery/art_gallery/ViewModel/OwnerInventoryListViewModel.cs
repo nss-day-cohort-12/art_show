@@ -26,6 +26,7 @@ namespace art_gallery.ViewModel
 
         //from artist
         public string Name { get; set; }
+        public string BirthYear { get; set; }
 
         public List<OwnerInventory> Inventory { get; set; }
     }

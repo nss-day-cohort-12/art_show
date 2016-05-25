@@ -69,7 +69,8 @@ namespace art_gallery.Controllers
                    Artist artist = new Artist
                 {
                     Name = ownerInvDetails.Name,
-                    ArtistId = artistId
+                    ArtistId = artistId,
+                    BirthYear = ownerInvDetails.BirthYear
                 };
                     _context.Artist.Add(artist); // saves data to the context
 
