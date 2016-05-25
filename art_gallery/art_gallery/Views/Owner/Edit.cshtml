@@ -1,0 +1,19 @@
+﻿@model art_gallery.ViewModel.OwnerInventoryListViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.IndividualPieceId)
+
+    @Html.Label("Price")
+    @Html.EditorFor(model => model.Price)
+
+    @Html.Label("Cost")
+    @Html.EditorFor(model => model.Cost)
+
+    <input type="submit" value="Edit" />
+}

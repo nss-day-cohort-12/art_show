@@ -5,13 +5,32 @@
 
 <h2>OwnerInventory</h2>
 
+<table>
+    <th>
+        <td width="100">IndividualPieceId</td>
+        <td width="100">Title</td>
+        <td width="100">Artist</td>
+        <td width="100">Price</td>
+        <td width="100">Cost</td>
+        <td width="100">Edit</td>
+        <td width="100">Delete</td>
+        
+    </th>
+
+
 @foreach (var item in Model.Inventory)
 {
-    <article>
-        <div>Title: @item.Title</div>
-        <div>Artist: @item.Name</div>
-        <div>Price: $@item.Price</div>
-        <div>Cost: $@item.Cost</div>
-    </article>
+    <tr>
+        <td></td>
+        <td>@Html.DisplayFor(ModelItem => item.IndividualPieceId)</td>
+        <td>@Html.DisplayFor(ModelItem => item.Title)</td>
+        <td>@Html.DisplayFor(ModelItem => item.Name)</td>
+        <td>@Html.DisplayFor(ModelItem => item.Price)</td>
+        <td>@Html.DisplayFor(ModelItem => item.Cost)</td>
+        <td>@Html.ActionLink("edit", "Edit", new { ipId = item.IndividualPieceId })</td>
+        <td>@Html.ActionLink("delete", "Delete", new { IndividualPieceId = item.IndividualPieceId })</td>
+
+    </tr>
 }
+</table>
 
