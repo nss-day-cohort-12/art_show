@@ -1,15 +1,17 @@
 ﻿@model art_gallery.ViewModel.ArtDetailViewModel
 
-<div class="row">
+<div class="container">
   @foreach (var item in Model.ArtListings)
   {
-    <div class="col-md-1"></div>
-    <div class="col-md-4">
-      <h4>@item.Title</h4>
-      <h4>by <a href="@Url.Action("IndividualArtistView", "Home", new { ArtistId = item.ArtistId })">@item.ArtistName</a></h4>
-      <div><a href="@Url.Action("IndividualPieceView", "Home", new { ArtWorkId = @item.ArtWorkId })"><img src="@item.Image" alt="@item.Title" /></a></div>
-      <div>Medium: @item.Medium</div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <h4>@item.Title</h4>
+        <h4>by <a href="@Url.Action("IndividualArtistView", "Home", new { ArtistId = item.ArtistId })">@item.ArtistName</a></h4>
+        <div><a href="@Url.Action("IndividualPieceView", "Home", new { ArtWorkId = @item.ArtWorkId })"><img src="@item.Image" alt="@item.Title" /></a></div>
+        <div>Medium: @item.Medium</div>
+      </div>
+      <div class="col-md-2"></div>
     </div>
-    <div class="col-md-1"></div>
   }
 </div>

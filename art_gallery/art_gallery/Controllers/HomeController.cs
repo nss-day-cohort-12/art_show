@@ -39,7 +39,7 @@ namespace art_gallery.Controllers
                           ArtistId = artgroup.Key.ArtistId,
                           ArtistName = artgroup.Key.ArtistName,
                           Medium = artgroup.Key.Medium
-                        }).ToList();
+                        }).Distinct().ToList();
       return View(art);
     }
 
@@ -81,11 +81,11 @@ namespace art_gallery.Controllers
       Context _context = new Context();
       ArtDetailViewModel art = new ArtDetailViewModel();
       art.ArtListings = (from work in _context.ArtWork
-                         join piece in _context.IndividualPiece
-                         on work.ArtWorkId equals piece.ArtWorkId
                          join artist in _context.Artist
                          on work.ArtistId equals artist.ArtistId
                          where work.ArtistId == ArtistId
+                         join piece in _context.IndividualPiece
+                         on work.ArtWorkId equals piece.ArtWorkId
                          select new ArtWorkWithImagesViewModel
                          {
                            ArtWorkId = work.ArtWorkId,
@@ -94,7 +94,7 @@ namespace art_gallery.Controllers
                            PurchaseURL = piece.PurchaseURL,
                            ArtistName = artist.Name,
                            Medium = work.Medium
-                         }).ToList();
+                         }).Distinct().ToList();
       return View(art);
     }
 
@@ -117,7 +117,7 @@ namespace art_gallery.Controllers
                            ArtistName = artist.Name,
                            Medium = work.Medium,
                            ArtistId = artist.ArtistId
-                         }).ToList();
+                         }).Distinct().ToList();
       return View(art);
     }
   }
