@@ -21,7 +21,10 @@ namespace art_gallery.Controllers
                                 {
                                     AgentId = ag.AgentId,
                                     FirstName = ag.FirstName,
-                                    LastName = ag.LastName
+                                    LastName = ag.LastName,
+                                    Address = ag.Address,
+                                    Location = ag.Location,
+                                    PhoneNumber = ag.PhoneNumber
                                 }).ToList();
 
                 return View(agentDetails);
@@ -49,6 +52,7 @@ namespace art_gallery.Controllers
                                     Address = ag.Address,
                                     PhoneNumber = ag.PhoneNumber,
                                     Active = ag.Active,
+                                    InvoiceId = inv.InvoiceId,
                                     IndividualPieceId = inp.IndividualPieceId,
                                     Cost = inp.Cost,
                                     Price = inp.Price,
