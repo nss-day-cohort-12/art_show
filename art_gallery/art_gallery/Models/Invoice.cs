@@ -13,5 +13,6 @@ namespace art_gallery.Models
     public int IndividualPieceId { get; set; }
     public string PaymentMethod { get; set; }
     public string ShippingAddress { get; set; }
+    public DateTime InvoiceDate { get; set; }
   }
 }
