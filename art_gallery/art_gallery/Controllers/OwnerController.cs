@@ -50,6 +50,24 @@ namespace art_gallery.Controllers
             }
         }
 
+        public int getNextArtworkId()
+        {
+            using (Context _context = new Context())
+            {
+                var nextId = _context.ArtWork.Max(x => x.ArtWorkId) + 1;
+                return nextId;
+            }
+        }
+
+        public int getNextIpId()
+        {
+            using (Context _context = new Context())
+            {
+                var nextId = _context.IndividualPiece.Max(x => x.IndividualPieceId) + 1;
+                return nextId;
+            }
+        }
+
         // GET: Owner/Create
         public ActionResult Create()
         {
@@ -61,24 +79,53 @@ namespace art_gallery.Controllers
         public ActionResult Create(OwnerInventoryListViewModel ownerInvDetails)
         {
             var artistId = getNextArtistId();
+            var artworkId = getNextArtworkId();
+            var ipId = getNextIpId();
 
             using (Context _context = new Context())
             {        
                 if (ModelState.IsValid)
                 {
                    Artist artist = new Artist
-                {
-                    Name = ownerInvDetails.Name,
-                    ArtistId = artistId,
-                    BirthYear = ownerInvDetails.BirthYear
-                };
+                    {
+                        Name = ownerInvDetails.Name,
+                        ArtistId = artistId,
+                        BirthYear = ownerInvDetails.BirthYear
+                    };
                     _context.Artist.Add(artist); // saves data to the context
-
                     _context.SaveChanges(); // saves data to database
-                    return RedirectToAction("Index");
+                }
+
+                if (ModelState.IsValid)
+                {
+                    ArtWork artwork = new ArtWork
+                    {
+                        ArtWorkId = artworkId,
+                        Title = ownerInvDetails.Title,
+                        ArtistId = artistId,
+                        Category = ownerInvDetails.Category                     
+                    };
+                    _context.ArtWork.Add(artwork); // saves data to the context
+                    _context.SaveChanges(); // saves data to database
+                }
+
+                if (ModelState.IsValid)
+                {
+                    IndividualPiece ip = new IndividualPiece
+                    {
+                        IndividualPieceId = ipId,
+                        ArtWorkId = artworkId,
+                        Cost = ownerInvDetails.Cost,
+                        Price = ownerInvDetails.Price,
+                        Sold = ownerInvDetails.Sold,
+                        Location = ownerInvDetails.Location,
+                    };
+                    _context.IndividualPiece.Add(ip); // saves data to the context
+                    _context.SaveChanges(); // saves data to database
                 }
             }
-            return View();
+
+            return RedirectToAction("Index");
         }
 
         // GET: Owner/Edit/5
