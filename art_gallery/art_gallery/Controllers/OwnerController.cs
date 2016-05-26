@@ -247,5 +247,28 @@ namespace art_gallery.Controllers
                 return View();
             }
         }
+
+        public ActionResult Sold()
+        {
+            Context _context = new Context();
+            OwnerInventoryViewModel soldInv = new OwnerInventoryViewModel();
+            soldInv.Inventory = (from aw in _context.ArtWork
+                                 join ip in _context.IndividualPiece
+                                 on aw.ArtWorkId equals ip.ArtWorkId
+                                 join ar in _context.Artist
+                                 on aw.ArtistId equals ar.ArtistId
+                                 orderby ip.IndividualPieceId
+                                 where ip.Sold == true
+                                 select new OwnerInventory
+                                 {
+                                     Title = aw.Title,
+                                     Name = ar.Name,
+                                     Cost = ip.Cost,
+                                     Price = ip.Price,
+                                     Profit = ip.Price - ip.Cost,
+                                      IndividualPieceId = ip.IndividualPieceId
+                                  }).ToList();
+            return View(soldInv);
+        }
     }
 }

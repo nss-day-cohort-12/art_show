@@ -7,6 +7,9 @@ namespace art_gallery.Models
 {
     public class OwnerInventory
     {
+        //calculated
+        public decimal Profit { get; set; }
+
         //from artwork
         public int ArtWorkId { get; set; }
         public int ArtistId { get; set; }
