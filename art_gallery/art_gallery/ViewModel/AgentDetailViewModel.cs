@@ -19,14 +19,17 @@ namespace art_gallery.ViewModel
 
         //from invoice
         public int IndividualPieceId { get; set; }
+        public int InvoiceId { get; set; }
 
         //from individualPiece
         public decimal Cost { get; set; }
         public decimal Price { get; set; }
 
-
         public decimal Profit { get; set; }
+        public decimal TotalProfit { get; set; }
 
         public List<Agent> Agent { get; set; }
+
     }
 }
+

@@ -5,16 +5,20 @@
 
 <h2>Agent List</h2>
 <br />
-<button>@Html.ActionLink("Add New Agent", "Create")</button>
+<button>@Html.ActionLink("Add New Agent ", "Create")<span class="glyphicon glyphicon-user"></span></button>
+
 <br /><br />
 <table>
     <th>
         <td style="font-weight:bold; width:50px;">ID</td>
-        <td style="font-weight:bold; width:100px;">FIRST</td>
-        <td style="font-weight:bold; width:100px;">LAST</td>
-        <td style="font-weight:bold; width:100px;">DETAILS</td>
-        <td style="font-weight:bold; width:100px;">EDIT</td>
-        <td style="font-weight:bold; width:100px;">DELETE</td>
+        <td style="font-weight:bold; width:80px;">FIRST</td>
+        <td style="font-weight:bold; width:80px;">LAST</td>
+        <td style="font-weight:bold; width:160px;">ADDRESS</td>
+        <td style="font-weight:bold; width:100px;">LOCATION</td>
+        <td style="font-weight:bold; width:120px;">PHONE</td>
+        <td style="font-weight:bold; width:80px;">DETAILS</td>
+        <td style="font-weight:bold; width:80px;">EDIT</td>
+        <td style="font-weight:bold; width:80px;">DELETE</td>
     </th>
     @foreach (var item in Model)
     {
@@ -23,9 +27,29 @@
             <td>@Html.DisplayFor(ModelItem => item.AgentId)</td>
             <td>@Html.DisplayFor(ModelItem => item.FirstName)</td>
             <td>@Html.DisplayFor(ModelItem => item.LastName)</td>
-            <td>@Html.ActionLink("details", "Details", new { agentId = item.AgentId})</td>
-            <td>@Html.ActionLink("edit", "Edit", new { agentId = item.AgentId })</td>
-            <td>@Html.ActionLink("delete", "Delete", new { agentId = item.AgentId })</td>
+            <td>@Html.DisplayFor(ModelItem => item.Address)</td>
+            <td>@Html.DisplayFor(ModelItem => item.Location)</td>
+            <td>@Html.DisplayFor(ModelItem => item.PhoneNumber)</td>
+            <td>
+                <a href="@Url.Action("Details", new { agentId = item.AgentId })">
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                </a>
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { agentId = item.AgentId })">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+            </td>
+            <td>
+                <a href="@Url.Action("Delete", new { agentId = item.AgentId })">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </td>
+        
+            @*<td>@Html.ActionLink("details", "Details", new { agentId = item.AgentId})</td>*@
+            @*<td>@Html.ActionLink("edit", "Edit", new { agentId = item.AgentId })</td>*@
+            @*<td>@Html.ActionLink("<span class='glyphicon glyphicon-trash'></span", "Delete", new { agentId = item.AgentId })</td>*@
+        
         </tr>
     }
 

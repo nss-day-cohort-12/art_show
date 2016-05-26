@@ -21,3 +21,34 @@ textarea {
     width: 100px;
 }
 
+/* buttons */
+button {
+    background-color: darkred;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+}
+
+button a:link,
+button a:hover,
+button a:visited {
+    color: white;
+    font-weight: bold;
+}
+
+button span {
+    color: white;
+}
+
+td span.glyphicon {
+    color: darkred;
+}
+
+input {
+}
+
+/* FORM */
+
+label {
+    width: 110px;
+}
