@@ -271,8 +271,18 @@ namespace art_gallery.Controllers
                                      Cost = ip.Cost,
                                      Price = ip.Price,
                                      Profit = ip.Price - ip.Cost,
-                                      IndividualPieceId = ip.IndividualPieceId
+                                     IndividualPieceId = ip.IndividualPieceId
                                   }).ToList();
+
+            decimal totalProfit = 0;
+
+            for(var i = 0; i < soldInv.Inventory.Count; i++)
+            {
+                totalProfit += soldInv.Inventory[i].Profit;
+            }
+
+            soldInv.TotalProfit = totalProfit;
+
             return View(soldInv);
         }
     }

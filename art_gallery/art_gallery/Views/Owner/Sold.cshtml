@@ -24,9 +24,18 @@
             <td></td>
             <td>@Html.DisplayFor(ModelItem => item.Title)</td>
             <td>@Html.DisplayFor(ModelItem => item.Name)</td>
-            <td>@Html.DisplayFor(ModelItem => item.Price)</td>
-            <td>@Html.DisplayFor(ModelItem => item.Cost)</td>
-            <td>@Html.DisplayFor(ModelItem => item.Profit)</td>
+            <td>$@Html.DisplayFor(ModelItem => item.Price)</td>
+            <td>$@Html.DisplayFor(ModelItem => item.Cost)</td>
+            <td>$@Html.DisplayFor(ModelItem => item.Profit)</td>
         </tr>
     }
+
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="bold">Total Profit:</td>
+        <td>$@Model.TotalProfit</td>
+    </tr>
 </table>

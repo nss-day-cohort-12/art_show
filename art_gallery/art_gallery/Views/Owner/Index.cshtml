@@ -26,8 +26,8 @@
         @*<td>@Html.DisplayFor(ModelItem => item.IndividualPieceId)</td>*@
         <td>@Html.DisplayFor(ModelItem => item.Title)</td>
         <td>@Html.DisplayFor(ModelItem => item.Name)</td>
-        <td>@Html.DisplayFor(ModelItem => item.Price)</td>
-        <td>@Html.DisplayFor(ModelItem => item.Cost)</td>
+        <td>$@Html.DisplayFor(ModelItem => item.Price)</td>
+        <td>$@Html.DisplayFor(ModelItem => item.Cost)</td>
         <td>@Html.ActionLink("edit", "Edit", new { ipId = item.IndividualPieceId })</td>
         <td>@Html.ActionLink("delete", "Delete", new { IndividualPieceId = item.IndividualPieceId })</td>
 
