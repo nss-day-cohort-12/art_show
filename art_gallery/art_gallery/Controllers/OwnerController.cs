@@ -217,13 +217,13 @@ namespace art_gallery.Controllers
         }
 
         // GET: Owner/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int IndividualPieceId)
         {
-            if (id != 0)
+            if (IndividualPieceId != 0)
             {
                 using (Context _context = new Context())
                 {
-                    IndividualPiece idvP = _context.IndividualPiece.Find(id);
+                    IndividualPiece idvP = _context.IndividualPiece.Find(IndividualPieceId);
 
                     _context.IndividualPiece.Remove(idvP);
                     _context.SaveChanges();
