@@ -8,6 +8,8 @@ namespace art_gallery.ViewModel
 {
     public class OwnerInventoryViewModel
     {
+        public decimal TotalProfit { get; set; }
+
         //from artwork
         public int ArtWorkId { get; set; }
         public int ArtistId { get; set; }

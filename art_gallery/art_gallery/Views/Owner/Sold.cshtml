@@ -1,0 +1,41 @@
+﻿@model art_gallery.ViewModel.OwnerInventoryViewModel
+@{
+    ViewBag.Title = "Sold Inventory";
+}
+
+<h2>Sold Inventory</h2>
+<button>@Html.ActionLink("View All", "Sold", new { days = 100000 })</button>
+<button>@Html.ActionLink("View Week", "Sold", new { days = 7 })</button>
+<button>@Html.ActionLink("View Month", "Sold", new { days = 31 })</button>
+<button>@Html.ActionLink("View Year", "Sold", new { days = 365 })</button>
+
+<table>
+    <th>
+        <td class="bold">Title</td>
+        <td class="bold">Artist</td>
+        <td class="bold">Price</td>
+        <td class="bold">Cost</td>
+        <td class="bold">Profit</td>
+    </th>
+
+    @foreach (var item in Model.Inventory)
+    {
+        <tr>
+            <td></td>
+            <td>@Html.DisplayFor(ModelItem => item.Title)</td>
+            <td>@Html.DisplayFor(ModelItem => item.Name)</td>
+            <td>$@Html.DisplayFor(ModelItem => item.Price)</td>
+            <td>$@Html.DisplayFor(ModelItem => item.Cost)</td>
+            <td>$@Html.DisplayFor(ModelItem => item.Profit)</td>
+        </tr>
+    }
+
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="bold">Total Profit:</td>
+        <td>$@Model.TotalProfit</td>
+    </tr>
+</table>

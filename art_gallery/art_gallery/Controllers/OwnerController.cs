@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using art_gallery.Models;
 using art_gallery.ViewModel;
+using System.Data.Entity;
 
 namespace art_gallery.Controllers
 {
@@ -246,6 +247,43 @@ namespace art_gallery.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult Sold(double days)
+        {
+            var today = DateTime.Today;
+
+            Context _context = new Context();
+            OwnerInventoryViewModel soldInv = new OwnerInventoryViewModel();
+            soldInv.Inventory = (from aw in _context.ArtWork
+                                 join ip in _context.IndividualPiece
+                                 on aw.ArtWorkId equals ip.ArtWorkId
+                                 join ar in _context.Artist
+                                 on aw.ArtistId equals ar.ArtistId
+                                 join inv in _context.Invoice
+                                 on ip.IndividualPieceId equals inv.IndividualPieceId
+                                 orderby ip.IndividualPieceId
+                                 where ip.Sold == true && DbFunctions.DiffDays(inv.InvoiceDate, DateTime.Now) <= days 
+                                 select new OwnerInventory
+                                 {
+                                     Title = aw.Title,
+                                     Name = ar.Name,
+                                     Cost = ip.Cost,
+                                     Price = ip.Price,
+                                     Profit = ip.Price - ip.Cost,
+                                     IndividualPieceId = ip.IndividualPieceId
+                                  }).ToList();
+
+            decimal totalProfit = 0;
+
+            for(var i = 0; i < soldInv.Inventory.Count; i++)
+            {
+                totalProfit += soldInv.Inventory[i].Profit;
+            }
+
+            soldInv.TotalProfit = totalProfit;
+
+            return View(soldInv);
         }
     }
 }
