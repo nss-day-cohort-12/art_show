@@ -5,24 +5,24 @@
 
 <h2>OwnerInventory</h2>
 
+<button>@Html.ActionLink("Add ArtWork", "Create")</button>
+
 <table>
     <th>
-        <td width="100">IndividualPieceId</td>
-        <td width="100">Title</td>
-        <td width="100">Artist</td>
-        <td width="100">Price</td>
-        <td width="100">Cost</td>
-        <td width="100">Edit</td>
-        <td width="100">Delete</td>
-        
+        @*<td width="100">IndividualPieceId</td>*@
+        <td class="bold">Title</td>
+        <td class="bold">Artist</td>
+        <td class="bold">Price</td>
+        <td class="bold">Cost</td>
+        <td class="bold">Edit</td>
+        <td class="bold">Delete</td>
     </th>
-
 
 @foreach (var item in Model.Inventory)
 {
     <tr>
         <td></td>
-        <td>@Html.DisplayFor(ModelItem => item.IndividualPieceId)</td>
+        @*<td>@Html.DisplayFor(ModelItem => item.IndividualPieceId)</td>*@
         <td>@Html.DisplayFor(ModelItem => item.Title)</td>
         <td>@Html.DisplayFor(ModelItem => item.Name)</td>
         <td>@Html.DisplayFor(ModelItem => item.Price)</td>

@@ -12,6 +12,7 @@ namespace art_gallery.ViewModel
         public int ArtWorkId { get; set; }
         public int ArtistId { get; set; }
         public string Title { get; set; }
+        public string Category { get; set; }
         public int NumberInInventory { get; set; }
         public int NumberSold { get; set; }
 
@@ -26,6 +27,7 @@ namespace art_gallery.ViewModel
 
         //from artist
         public string Name { get; set; }
+        public string BirthYear { get; set; }
 
         public List<OwnerInventory> Inventory { get; set; }
     }
