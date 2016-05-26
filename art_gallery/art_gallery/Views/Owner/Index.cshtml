@@ -6,7 +6,7 @@
 <h2>OwnerInventory</h2>
 
 <button>@Html.ActionLink("Add ArtWork", "Create")</button>
-<button>@Html.ActionLink("View Sold", "Sold")</button>
+<button>@Html.ActionLink("View Sold", "Sold", new { days = 10000 })</button>
 
 <table>
     <th>

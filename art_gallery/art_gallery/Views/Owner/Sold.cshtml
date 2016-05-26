@@ -4,6 +4,10 @@
 }
 
 <h2>Sold Inventory</h2>
+<button>@Html.ActionLink("View All", "Sold", new { days = 100000 })</button>
+<button>@Html.ActionLink("View Week", "Sold", new { days = 7 })</button>
+<button>@Html.ActionLink("View Month", "Sold", new { days = 31 })</button>
+<button>@Html.ActionLink("View Year", "Sold", new { days = 365 })</button>
 
 <table>
     <th>

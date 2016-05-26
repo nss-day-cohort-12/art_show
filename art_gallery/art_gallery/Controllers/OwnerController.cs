@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using art_gallery.Models;
 using art_gallery.ViewModel;
+using System.Data.Entity;
 
 namespace art_gallery.Controllers
 {
@@ -248,8 +249,10 @@ namespace art_gallery.Controllers
             }
         }
 
-        public ActionResult Sold()
+        public ActionResult Sold(double days)
         {
+            var today = DateTime.Today;
+
             Context _context = new Context();
             OwnerInventoryViewModel soldInv = new OwnerInventoryViewModel();
             soldInv.Inventory = (from aw in _context.ArtWork
@@ -257,8 +260,10 @@ namespace art_gallery.Controllers
                                  on aw.ArtWorkId equals ip.ArtWorkId
                                  join ar in _context.Artist
                                  on aw.ArtistId equals ar.ArtistId
+                                 join inv in _context.Invoice
+                                 on ip.IndividualPieceId equals inv.IndividualPieceId
                                  orderby ip.IndividualPieceId
-                                 where ip.Sold == true
+                                 where ip.Sold == true && DbFunctions.DiffDays(inv.InvoiceDate, DateTime.Now) <= days 
                                  select new OwnerInventory
                                  {
                                      Title = aw.Title,

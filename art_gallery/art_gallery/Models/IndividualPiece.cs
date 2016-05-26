@@ -18,5 +18,5 @@ namespace art_gallery.Models
     public bool Sold { get; set; }
     public string Location { get; set; }
     public string EditionNumber { get; set; }
-  }
+    }
 }
