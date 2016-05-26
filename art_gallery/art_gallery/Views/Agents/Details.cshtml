@@ -1,0 +1,38 @@
+﻿@model art_gallery.ViewModel.AgentListViewModel
+@{
+    ViewBag.Title = "Agent Details";
+}
+
+<h2>Agent Details</h2>
+
+<table>
+    <th>
+        <td style="font-weight:bold; width:50px;">ID</td>
+        <td style="font-weight:bold; width:80px;">FIRST</td>
+        <td style="font-weight:bold; width:80px;">LAST</td>
+        <td style="font-weight:bold; width:100px;">LOCATION</td>
+        <td style="font-weight:bold; width:150px;">ADDRESS</td>
+        <td style="font-weight:bold; width:100px;">PHONE NUMBER</td>
+        <td style="font-weight:bold; width:80px;">ACTIVE</td>
+        <td style="font-weight:bold; width:100px;">COST</td>
+        <td style="font-weight:bold; width:100px;">PRICE</td>
+        <td style="font-weight:bold; width:100px;">PROFIT</td>
+    </th>
+    @foreach (var item in Model.Agents)
+    {
+        <tr>
+            <td></td>
+            <td>@Html.DisplayFor(ModelItem => item.AgentId)</td>
+            <td>@Html.DisplayFor(ModelItem => item.FirstName)</td>
+            <td>@Html.DisplayFor(ModelItem => item.LastName)</td>
+            <td>@Html.DisplayFor(ModelItem => item.Address)</td>
+            <td>@Html.DisplayFor(ModelItem => item.Location)</td>
+            <td>@Html.DisplayFor(ModelItem => item.PhoneNumber)</td>
+            <td>@Html.DisplayFor(ModelItem => item.Active)</td>
+            <td>@Html.DisplayFor(ModelItem => item.Cost)</td>
+            <td>@Html.DisplayFor(ModelItem => item.Price)</td>
+            <td>@Html.DisplayFor(ModelItem => item.Profit)</td>
+        </tr>
+    }
+
+</table>

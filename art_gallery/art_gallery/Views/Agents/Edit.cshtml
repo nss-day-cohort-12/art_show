@@ -1,0 +1,29 @@
+﻿@model art_gallery.ViewModel.AgentDetailViewModel
+@{
+    ViewBag.Title = "Edit Agent";
+}
+
+<h2>Edit Agent</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.Label("First Name")
+    @Html.EditorFor(model => model.FirstName)
+    <br />
+    @Html.Label("Last Name")
+    @Html.EditorFor(model => model.LastName)
+    <br />
+    @Html.Label("Location")
+    @Html.EditorFor(model => model.Location)
+    <br />
+    @Html.Label("Address")
+    @Html.EditorFor(model => model.Address)
+    <br />
+    @Html.Label("Phone Number")
+    @Html.EditorFor(model => model.PhoneNumber)
+    <br />
+    @Html.Label("Active")
+    @Html.EditorFor(model => model.Active)
+    <input type="submit" value="Edit" />
+}
+
