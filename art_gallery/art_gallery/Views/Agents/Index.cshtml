@@ -12,6 +12,7 @@
         <td style="font-weight:bold; width:50px;">ID</td>
         <td style="font-weight:bold; width:100px;">FIRST</td>
         <td style="font-weight:bold; width:100px;">LAST</td>
+        <td style="font-weight:bold; width:100px;">DETAILS</td>
         <td style="font-weight:bold; width:100px;">EDIT</td>
         <td style="font-weight:bold; width:100px;">DELETE</td>
     </th>
@@ -22,6 +23,7 @@
             <td>@Html.DisplayFor(ModelItem => item.AgentId)</td>
             <td>@Html.DisplayFor(ModelItem => item.FirstName)</td>
             <td>@Html.DisplayFor(ModelItem => item.LastName)</td>
+            <td>@Html.ActionLink("details", "Details", new { agentId = item.AgentId})</td>
             <td>@Html.ActionLink("edit", "Edit", new { agentId = item.AgentId })</td>
             <td>@Html.ActionLink("delete", "Delete", new { agentId = item.AgentId })</td>
         </tr>

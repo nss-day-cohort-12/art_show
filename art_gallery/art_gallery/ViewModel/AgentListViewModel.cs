@@ -18,11 +18,11 @@ namespace art_gallery.ViewModel
         public bool Active { get; set; }
 
         ////from invoice
-        //public int IndividualPieceId { get; set; }
+        public int IndividualPieceId { get; set; }
 
         ////from individualPiece
-        //public decimal Cost { get; set; }
-
+        public decimal Cost { get; set; }
+        public decimal Price { get; set; }
         public List<AgentDetailViewModel> Agents { get; set; }
 
     }

@@ -22,6 +22,10 @@ namespace art_gallery.ViewModel
 
         //from individualPiece
         public decimal Cost { get; set; }
+        public decimal Price { get; set; }
+
+
+        public decimal Profit { get; set; }
 
         public List<Agent> Agent { get; set; }
     }

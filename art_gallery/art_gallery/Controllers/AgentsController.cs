@@ -27,6 +27,38 @@ namespace art_gallery.Controllers
                 return View(agentDetails);
         }
 
+
+        // GET: Agents Details
+        public ActionResult Details(int agentId)
+        {
+            Context _context = new Context();
+            AgentListViewModel agentList = new AgentListViewModel();
+            agentList.Agents = (from ag in _context.Agent
+                                where ag.AgentId == agentId
+                                join inv in _context.Invoice
+                                on ag.AgentId equals inv.AgentId
+                                join inp in _context.IndividualPiece
+                                on inv.IndividualPieceId equals inp.IndividualPieceId
+                                orderby ag.AgentId
+                                select new AgentDetailViewModel
+                                {
+                                    AgentId = ag.AgentId,
+                                    FirstName = ag.FirstName,
+                                    LastName = ag.LastName,
+                                    Location = ag.Location,
+                                    Address = ag.Address,
+                                    PhoneNumber = ag.PhoneNumber,
+                                    Active = ag.Active,
+                                    IndividualPieceId = inp.IndividualPieceId,
+                                    Cost = inp.Cost,
+                                    Price = inp.Price,
+                                    Profit = inp.Price - inp.Cost                              
+                                }).ToList();
+
+            return View(agentList);
+        }
+
+       
         // CREATE
         [HttpGet]
         public ActionResult Create()
@@ -132,19 +164,7 @@ namespace art_gallery.Controllers
 
 
 
-        //var agentDetails = (from ag in _context.Agent
-        //                    join inv in _context.Invoice
-        //                    on ag.AgentId equals inv.AgentId
-        //                    join inp in _context.IndividualPiece
-        //                    on inv.IndividualPieceId equals inp.IndividualPieceId
-        //                    orderby ag.AgentId
-        //                    select new AgentDetailViewModel
-        //                    {
-        //                        AgentId = ag.AgentId,
-        //                        FirstName = ag.FirstName,
-        //                        LastName = ag.LastName
-        //                    }).ToList();
-
+        
 
 
 
