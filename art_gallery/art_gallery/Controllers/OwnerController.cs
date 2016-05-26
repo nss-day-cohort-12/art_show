@@ -41,12 +41,20 @@ namespace art_gallery.Controllers
             return View();
         }
 
-        public int getNextArtistId()
+        public int getNextArtistId(string artistName)
         {
             using (Context _context = new Context())
             {
-                var nextId = _context.Artist.Max(x => x.ArtistId) + 1;
-                return nextId;
+                List<int> artistIdList = (from ar in _context.Artist
+                                 where ar.Name == artistName
+                                 select ar.ArtistId ).ToList();
+
+                if (artistIdList.Count == 0 )
+                {
+                    return _context.Artist.Max(x => x.ArtistId) + 1;
+                }
+
+                return artistIdList[0];
             }
         }
 
@@ -78,7 +86,7 @@ namespace art_gallery.Controllers
         [HttpPost]
         public ActionResult Create(OwnerInventoryListViewModel ownerInvDetails)
         {
-            var artistId = getNextArtistId();
+            var artistId = getNextArtistId(ownerInvDetails.Name);
             var artworkId = getNextArtworkId();
             var ipId = getNextIpId();
 
