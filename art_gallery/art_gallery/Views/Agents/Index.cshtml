@@ -9,21 +9,20 @@
 
 <br /><br />
 <table>
-    <th>
-        <td style="font-weight:bold; width:50px;">ID</td>
-        <td style="font-weight:bold; width:80px;">FIRST</td>
-        <td style="font-weight:bold; width:80px;">LAST</td>
-        <td style="font-weight:bold; width:160px;">ADDRESS</td>
-        <td style="font-weight:bold; width:100px;">LOCATION</td>
-        <td style="font-weight:bold; width:120px;">PHONE</td>
-        <td style="font-weight:bold; width:80px;">DETAILS</td>
-        <td style="font-weight:bold; width:80px;">EDIT</td>
-        <td style="font-weight:bold; width:80px;">DELETE</td>
-    </th>
+    <tr>
+        <th style="font-weight:bold; width:50px;">ID</th>
+        <th style="font-weight:bold; width:80px;">FIRST</th>
+        <th style="font-weight:bold; width:80px;">LAST</th>
+        <th style="font-weight:bold; width:160px;">ADDRESS</th>
+        <th style="font-weight:bold; width:100px;">LOCATION</th>
+        <th style="font-weight:bold; width:120px;">PHONE</th>
+        <th style="font-weight:bold; width:80px;">DETAILS</th>
+        <th style="font-weight:bold; width:80px;">EDIT</th>
+        <th style="font-weight:bold; width:80px;">DELETE</th>
+    </tr>
     @foreach (var item in Model)
     {
         <tr>
-            <td></td>
             <td>@Html.DisplayFor(ModelItem => item.AgentId)</td>
             <td>@Html.DisplayFor(ModelItem => item.FirstName)</td>
             <td>@Html.DisplayFor(ModelItem => item.LastName)</td>

@@ -10,18 +10,17 @@
 <button>@Html.ActionLink("View Year", "Sold", new { days = 365 })</button>
 
 <table>
-    <th>
-        <td class="bold">Title</td>
-        <td class="bold">Artist</td>
-        <td class="bold">Price</td>
-        <td class="bold">Cost</td>
-        <td class="bold">Profit</td>
-    </th>
+    <tr>
+        <th class="bold">Title</th>
+        <th class="bold">Artist</th>
+        <th class="bold">Price</th>
+        <th class="bold">Cost</th>
+        <th class="bold">Profit</th>
+    </tr>
 
     @foreach (var item in Model.Inventory)
     {
         <tr>
-            <td></td>
             <td>@Html.DisplayFor(ModelItem => item.Title)</td>
             <td>@Html.DisplayFor(ModelItem => item.Name)</td>
             <td>$@Html.DisplayFor(ModelItem => item.Price)</td>

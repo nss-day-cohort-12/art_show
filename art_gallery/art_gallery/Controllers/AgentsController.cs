@@ -59,6 +59,15 @@ namespace art_gallery.Controllers
                                     Profit = inp.Price - inp.Cost                              
                                 }).ToList();
 
+            decimal totalProfit = 0;
+
+            for (var i = 0; i < agentList.Agents.Count; i++)
+            {
+                totalProfit += agentList.Agents[i].Profit;
+            }
+
+            agentList.TotalProfit = totalProfit;
+            
             return View(agentList);
         }
 
