@@ -40,6 +40,23 @@ namespace art_gallery.Controllers
                           ArtistName = artgroup.Key.ArtistName,
                           Medium = artgroup.Key.Medium
                         }).Distinct().ToList();
+
+      /*
+      List<decimal> artPrices = (from piece in _context.IndividualPiece
+                              select piece.Price).Distinct().ToList();
+      foreach (var item in artPrices)
+      {
+        art.priceFloor.Add(Math.Round(item, 2));
+        art.priceCeiling.Add(Math.Round(item, 2));
+        SelectListItem price = new SelectListItem
+        {
+          Text = item.ToString(),
+          Value = item.ToString()
+        };
+        //art.priceOptions.
+      }
+      */
+
       return View(art);
     }
 
@@ -66,13 +83,6 @@ namespace art_gallery.Controllers
                            ArtistName = artist.Name,
                            Medium = work.Medium
                          }).FirstOrDefault();
-      /* image
-       * price
-       * dimensions
-       * # in inventory
-       * location
-       */
-
       return View(artPiece);
     }
 
@@ -119,6 +129,33 @@ namespace art_gallery.Controllers
                            ArtistId = artist.ArtistId
                          }).Distinct().ToList();
       return View(art);
+    }
+
+    public ActionResult PriceRangeView(decimal priceFloor, decimal priceCeiling)
+    {
+      ArtDetailViewModel art = new ArtDetailViewModel();
+      art.selectedPriceFloor =  priceFloor;
+      art.selectedPriceCeiling = priceCeiling;
+      using (Context _context = new Context())
+      {
+        art.ArtListings = (from work in _context.ArtWork
+                           join piece in _context.IndividualPiece
+                           on work.ArtWorkId equals piece.ArtWorkId
+                           join artist in _context.Artist
+                           on work.ArtistId equals artist.ArtistId
+                           where piece.Price > art.selectedPriceFloor && piece.Price < art.selectedPriceCeiling
+                           select new ArtWorkWithImagesViewModel
+                           {
+                             ArtWorkId = work.ArtWorkId,
+                             Title = work.Title,
+                             Image = piece.Image,
+                             PurchaseURL = piece.PurchaseURL,
+                             ArtistName = artist.Name,
+                             Medium = work.Medium,
+                             ArtistId = artist.ArtistId
+                           }).Distinct().ToList();
+      }
+      return View("Index",art);
     }
   }
 }

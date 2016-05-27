@@ -1,5 +1,30 @@
 ﻿@model art_gallery.ViewModel.ArtDetailViewModel
 
+@*<select>
+  @foreach (var item in Model.priceFloor)
+  {
+    <option value=@item>$@item</option>
+  }
+</select>
+
+<select>
+  @foreach (var item in Model.priceCeiling)
+  {
+    <option value=@item>$@item</option>
+  }
+</select>*@
+
+@*@Html.DropDownListFor(m => m.selectedPriceFloor, Model.priceOptions)
+@Html.DropDownListFor(m => m.selectedPriceCeiling, Model.priceOptions)
+<input type="submit" value="Index" />*@
+
+<h4>Filter by Price Range</h4>
+<ul>
+  <li><a href="@Url.Action("PriceRangeView", "Home", new { priceFloor = 0.00M, priceCeiling = 500.00M })">$1 - $500</a></li>
+  <li><a href="@Url.Action("PriceRangeView", "Home", new { priceFloor = 500.01M, priceCeiling = 1000.00M })">$501 - $1000</a></li>
+  <li><a href="@Url.Action("PriceRangeView", "Home", new { priceFloor = 1000.01M, priceCeiling = 2000.00M })">$1000 - $2000</a></li>
+</ul>
+
 <div class="container">
   @foreach (var item in Model.ArtListings)
   {
