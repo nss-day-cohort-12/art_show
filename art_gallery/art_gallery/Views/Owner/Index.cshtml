@@ -1,36 +1,42 @@
 ﻿@model art_gallery.ViewModel.OwnerInventoryViewModel
 @{
-    ViewBag.Title = "OwnerInventory";
+    ViewBag.Title = "Owner Inventory";
 }
 
-<h2>OwnerInventory</h2>
+<h2>Owner Inventory</h2>
 
 <button>@Html.ActionLink("Add ArtWork", "Create")</button>
 <button>@Html.ActionLink("View Sold", "Sold", new { days = 10000 })</button>
-
+<br /><br />
 <table>
-    <th>
-        @*<td width="100">IndividualPieceId</td>*@
-        <td class="bold">Title</td>
-        <td class="bold">Artist</td>
-        <td class="bold">Price</td>
-        <td class="bold">Cost</td>
-        <td class="bold">Edit</td>
-        <td class="bold">Delete</td>
-    </th>
+    <tr>
+        <th class="bold">TITLE</th>
+        <th class="bold">ARTIST</th>
+        <th class="bold">PRICE</th>
+        <th class="bold">COST</th>
+        <th class="bold">EDIT</th>
+        <th class="bold">DELETE</th>
+    </tr>
 
 @foreach (var item in Model.Inventory)
 {
     <tr>
-        <td></td>
+
         @*<td>@Html.DisplayFor(ModelItem => item.IndividualPieceId)</td>*@
         <td>@Html.DisplayFor(ModelItem => item.Title)</td>
         <td>@Html.DisplayFor(ModelItem => item.Name)</td>
         <td>$@Html.DisplayFor(ModelItem => item.Price)</td>
         <td>$@Html.DisplayFor(ModelItem => item.Cost)</td>
-        <td>@Html.ActionLink("edit", "Edit", new { ipId = item.IndividualPieceId })</td>
-        <td>@Html.ActionLink("delete", "Delete", new { IndividualPieceId = item.IndividualPieceId })</td>
-
+        <td>
+            <a href="@Url.Action("Edit", new { ipId = item.IndividualPieceId })">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </a>
+        </td>
+        <td>
+            <a href="@Url.Action("Details", new { ipId = item.IndividualPieceId })">
+                <span class="glyphicon glyphicon-trash"></span>
+            </a>
+        </td>
     </tr>
 }
 </table>
